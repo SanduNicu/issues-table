@@ -30,6 +30,7 @@
     "bootstrap": "^4.3.1",
     "create-react-context": "^0.2.3",
     "file-loader": "^3.0.1",
+    "ramda": "^0.26.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "semantic-ui-css": "^2.4.1",
