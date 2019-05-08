@@ -50,6 +50,7 @@ class IssueTable extends React.Component {
         </div>
       ) 
     }
+
     if (cell === 'created_at' || cell === 'updated_at') {
       return (
         <div>
@@ -57,6 +58,15 @@ class IssueTable extends React.Component {
         </div>
       )
     }
+
+    if (cell === 'title') {
+      return (
+        <div className="font-weight-bold">
+          {issue[cell]}
+        </div>
+      )
+    }
+
     return (
       <div key={cell}>
         {issue[cell]} 
