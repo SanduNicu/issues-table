@@ -6,7 +6,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      loading: true,
+      issues: {},
+    };
   }
 
   componentDidMount() {
@@ -24,10 +27,17 @@ class App extends React.Component {
       xmlHttp.send(null);
     })
 
-    promise.then(res => console.log(res))
+    promise.then(res => {
+      this.setState({ loading: false, issues: JSON.parse(res) })
+    })
   }
 
   render() {
+    const { loading, issues } = this.state;
+    if (loading) {
+      return "Loading..."; 
+    }
+    console.log(issues);
     return (
       <div>
         Placeholder
