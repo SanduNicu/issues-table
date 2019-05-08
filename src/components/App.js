@@ -1,6 +1,6 @@
 import React from 'react';
+import IssueTable from './IssueTable';
 import 'semantic-ui-css/semantic.min.css';
-import Table from './Table';
 
 const url = 'https://api.github.com/repos/facebook/react/issues';
 
@@ -39,9 +39,9 @@ class App extends React.Component {
     if (loading) {
       return "Loading..."; 
     }
-    console.log(issues);
+    
     return (
-      <Table />
+      <IssueTable issues={issues}/>
     );
   }
 }
