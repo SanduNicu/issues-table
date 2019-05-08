@@ -1,4 +1,6 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
+import Table from './Table';
 
 const url = 'https://api.github.com/repos/facebook/react/issues';
 
@@ -39,9 +41,7 @@ class App extends React.Component {
     }
     console.log(issues);
     return (
-      <div>
-        Placeholder
-      </div>
+      <Table />
     );
   }
 }
