@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react';
 import { splitEvery } from 'ramda';
+import moment from 'moment-mini';
 
 const header = [
   'Issue Number',
@@ -48,6 +49,13 @@ class IssueTable extends React.Component {
           }
         </div>
       ) 
+    }
+    if (cell === 'created_at' || cell === 'updated_at') {
+      return (
+        <div>
+          {moment(issue[cell]).fromNow()}
+        </div>
+      )
     }
     return (
       <div key={cell}>
