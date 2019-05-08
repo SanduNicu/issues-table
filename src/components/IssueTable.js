@@ -37,7 +37,11 @@ class IssueTable extends React.Component {
         <div>
           {
             issue.labels.map(label => (
-              <div key={label.id}>
+              <div 
+                className="badge badge-primary" 
+                style={{ backgroundColor: `#${label.color}` }}
+                key={label.id}
+              >
                 {label.name}
               </div>
             ))
