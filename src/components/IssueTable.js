@@ -20,7 +20,7 @@ const cells = [
   'state',
 ]
 
-const pageSize = 10;
+const pageSize = 5;
 
 class IssueTable extends React.Component {
   constructor(props) {
@@ -29,6 +29,27 @@ class IssueTable extends React.Component {
     this.state = {
       page: 0,
     };
+  }
+
+  renderCell(issue, cell) {
+    if (cell === 'labels') {
+      return (
+        <div>
+          {
+            issue.labels.map(label => (
+              <div key={label.id}>
+                {label.name}
+              </div>
+            ))
+          }
+        </div>
+      ) 
+    }
+    return (
+      <div key={cell}>
+        {issue[cell]} 
+      </div>
+    )
   }
 
   render() {
@@ -58,7 +79,9 @@ class IssueTable extends React.Component {
                 {
                   cells.map(cell => (
                     <Table.Cell key={cell}>
-                      Cell
+                      {
+                        this.renderCell(issue, cell)
+                      }
                     </Table.Cell>
                   ))
                 }
