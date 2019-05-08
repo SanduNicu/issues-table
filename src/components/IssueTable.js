@@ -27,7 +27,7 @@ class IssueTable extends React.Component {
     super(props);
 
     this.state = {
-      page: 0,
+      page: 1,
     };
   }
 
@@ -56,12 +56,23 @@ class IssueTable extends React.Component {
     )
   }
 
+  getPaginatedIssues = () => {
+    const { issues } = this.props;
+    return splitEvery(pageSize, issues);
+  }
+
+  changePage = (page) => {
+    const paginatedIssues = this.getPaginatedIssues();
+    if(page >= 1 && page <= paginatedIssues.length) {
+      this.setState({ page: page });
+    }
+  }
+
   render() {
     const { issues } = this.props;
     const { page } = this.state;
-    const paginatedIssues = splitEvery(pageSize, issues);
-    const pageIssues = paginatedIssues[page];
-    console.log(paginatedIssues);
+    const paginatedIssues = this.getPaginatedIssues();
+    const pageIssues = paginatedIssues[page - 1];
 
     return (
       <Table celled>
@@ -93,7 +104,32 @@ class IssueTable extends React.Component {
             ))
           }
         </Table.Body>
-
+        <Table.Footer>
+          <Table.Row>
+            <Table.HeaderCell colSpan='6'>
+              <Menu floated='right' pagination>
+                <Menu.Item as='a' icon onClick={() => this.changePage(page - 1)}>
+                  <Icon name='chevron left' />
+                </Menu.Item>
+                {
+                  paginatedIssues.map((issueGroup, index) => (
+                    <Menu.Item 
+                      as='a' 
+                      active={index + 1 === page}
+                      key={issueGroup[0].id}
+                      onClick={() => this.changePage(index + 1)}
+                    >
+                      {index + 1}
+                    </Menu.Item>
+                  ))
+                }
+                <Menu.Item as='a' icon onClick={() => this.changePage(page + 1)}>
+                  <Icon name='chevron right' />
+                </Menu.Item>
+              </Menu>
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Footer>
       </Table>
     );
   }
